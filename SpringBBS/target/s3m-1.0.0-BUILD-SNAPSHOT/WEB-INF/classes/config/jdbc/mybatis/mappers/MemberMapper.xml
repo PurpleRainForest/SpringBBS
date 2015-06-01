@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nz.co.s3m.member.dao.MemberDAO">
+	<!-- name of DAO interface, which should be implemented by this mapper xml -->
+
+	<!-- if db column name and vo field name are different, it could be mapped 
+		as follows -->
+	<resultMap type="nz.co.s3m.member.vo.MemberVO" id="MemberResultMap">
+		<!-- <result property="_name" column="NAME" /> <result property="email" 
+			column="EMAIL" /> <result property="phone" column="PHONE" /> -->
+	</resultMap>
+
+	<!-- id attribute should be same with method name of DAO interface -->
+	<select id="getMembers" resultMap="MemberResultMap">
+		SELECT * FROM tb_member
+	</select>
+
+	<!-- resultType for single result, resultMap for multi-row results -->
+	<select id="countMembers" resultType="java.lang.Integer">
+		SELECT count(*) FROM
+		tb_member
+	</select>
+
+	<!-- parameterType could be class name with full packages or class alias -->
+	<!-- in Oracle database... null parameter makes errors, in these case... 
+	     define the jdbcType as follows... makes null insert to table   -->
+	<insert id="insertMember" parameterType="nz.co.s3m.member.vo.MemberVO">
+		INSERT INTO tb_member (name, email, phone, regdate, filesrc)
+		values(#{name},#{email},#{phone}, now(), #{filesrc, jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="deleteMember">
+		DELETE FROM tb_member
+		WHERE regno=#{regno}
+	</delete>
+
+	<select id="getMemberDetail" resultType="nz.co.s3m.member.vo.MemberVO">
+		SELECT * FROM tb_member
+			WHERE regno=#{regno}
+	</select>
+
+	<update id=""></update>
+
+</mapper>

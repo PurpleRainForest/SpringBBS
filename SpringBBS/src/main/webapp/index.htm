@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Spring BBS</title>
+
+<link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<br />
+	<h3 class="mission-statement">BBS(Bulletin Board System) with SpringMVC</h3>
+	<br />
+	<a href='boardList.do?tbid=tb_clientside' class="btn btn-success btn-sm">Board List (HTML)</a>
+	<a href='boardListJson.do?tbid=tb_clientside' class="btn btn-warning btn-sm">REST API (JSON)</a>
+	<br /><br />
+	<h4>Frameworks</h4>
+	<ul>
+		<li>SpringMVC 3.1</li>
+		<li>MyBatis 3.2</li>
+		<li>Log4JDBC 0.2.7</li>
+		<li>Bootstrap</li> 
+		<li>CKeditor</li>
+		<li>Apache Commons DBCP 1.4</li>
+		<li>Apache Commons Fileupload 1.3.1</li>
+		<li>Code House Jackson Mapper 1.9.13</li>
+		<li>GSON 1.2.4</li>
+		<li>MariaDB</li>
+	</ul>
+	<br /><br />
+	<h4>Features</h4>
+	<ul>
+		<li>Multi language Support</li>
+		<li>Spring Based, MyBatis</li>
+		<li>Rich Text Editting (CKEditor)</li>
+		<li>AJAX Type Mutli File Upload</li>
+		<li>Vote (Like) Function</li>
+		<li>Pagination</li>
+		<li>JSON (REST) Support</li>
+	</ul>
+	<br /><br />
+	<h4>Screen shot</h4>
+	<ul>
+		<li>Article List</li>
+	</ul>
+		<img class='img-thumbnail' style='width: 550px;' src='./images/screen_l1.jpg' />
+	<br />
+	<ul>
+		<li>Detail View</li>
+	</ul>
+		<img class='img-thumbnail' style='width: 550px;' src='./images/screen_v1.jpg' />
+	<br />	
+	<ul>
+		<li>Edit/Register Page</li>
+	</ul>
+		<img class='img-thumbnail' style='width: 550px;' src='./images/screen_w1.jpg' />
+		
+	<br /><br />
+	<h4>How to Use</h4>
+	<h5>1. Database Table Creation</h5>
+		<div style="width: 550px;" class="bs-example">
+		<pre>create table tb_clientside
+       ( bbsno int(10) unsigned primary key auto_increment,
+       ref_no int(10) unsigned not null default '0',
+       ref_parent int(10) unsigned not null default '0',
+       ref_level int(10) unsigned not null default '0',
+       ref_step int(10) unsigned not null default '0',
+       title varchar(100) not null unique,
+       cont varchar(10000),
+       writer varchar(50),
+       cdate timestamp default '0000-00-00 00:00:00',
+       mdate timestamp default now(),
+       views int(10) unsigned default '0',
+       likes int(10) unsigned default '0',
+       afile varchar(1000),
+       deleted varchar(5) default 'N'
+     )  DEFAULT CHARSET=utf8 ;
+alter table tb_clientside add index index_tb_clientside_title (title);
+       </pre></div>
+	<br />
+	<h5>2. Database connectivity configuration</h5>
+	Edit 'src/main/java/config/jdbc/jdbc.properties'
+	<br />
+	<h5>3. Run index.htm</h5>
+	Select &amp; Run 'src/webapp/index.htm'
+	<br /><br />
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>angularjs #01</title>
+	<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+	<script src="js/controller01.js"></script>
+</head>
+<body>
+	<div data-ng-app="">
+		<div class="container"
+			data-ng-init="customers=[
+			{name:'John Smith', city:'Phoenix'},
+			{name:'John Doe', city:'New York'},
+			{name:'Jane Doe', city:'San Francisco'}]">
+
+			Name:<br /> <input type="text" data-ng-model="name" />{{name}}
+
+			<ul>
+				<li
+					data-ng-repeat="cust in customers | filter:name | orderBy:'city'">
+					{{ cust.name | uppercase }} - {{ cust.city | lowercase }}</li>
+			</ul>
+		</div>
+
+		<hr />
+
+		<!--  controller examples (controllers are in js/*.js) -->
+		<div data-ng-controller="SimpleController">
+			Name2:<br /> <input type="text" data-ng-model="name2" />{{name2}}
+
+			<ul>
+				<li
+					data-ng-repeat="cust in customers | filter:name2 | orderBy:'city'">
+					{{ cust.name | uppercase }} - {{ cust.city | lowercase }}</li>
+			</ul>
+		</div>
+		
+		<br /><br />
+		<a data-ng-href="ang02.html">AngularJS - 2</a>
+	</div>
+</body>
+</html>
+

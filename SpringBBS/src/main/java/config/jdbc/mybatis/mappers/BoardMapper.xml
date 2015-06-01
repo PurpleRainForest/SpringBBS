@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nz.co.s3m.boards.dao.BoardDAO">
+
+	<resultMap type="nz.co.s3m.boards.vo.BoardVO" id="BoardResultMap">
+	</resultMap>
+
+	<select id="boardList" resultMap="BoardResultMap">
+		select * from  (	
+				select @RN:=@RN+1 as ROWNUM, tbl.* from (	
+						select * from ${param5} WHERE ${param3} like '%${param4}%' ) as tbl,
+				(select @RN:=0) as r order by tbl.ref_no desc, tbl.ref_step asc  
+		) as tbl_rownum where tbl_rownum.rownum between ${param1} and ${param2} ;	
+	</select>
+
+	<select id="boardDetail" resultType="nz.co.s3m.boards.vo.BoardVO">
+		SELECT * FROM ${param2} 
+			WHERE bbsno=${param1}
+	</select>	
+
+	<insert id="insertBoard" parameterType="nz.co.s3m.boards.vo.BoardVO">
+		INSERT INTO ${tbid}  (ref_no, ref_parent, ref_level, ref_step, title, cont, writer, cdate, mdate, views, likes, afile, deleted)
+			VALUES (#{ref_no}, #{ref_parent}, #{ref_level}, #{ref_step}, #{title}, #{cont}, #{writer}, now(), now(), '0', '0', #{aFile}, 'N')
+	</insert>
+	
+	<update id="updateBoardViewCount">
+		UPDATE ${param2} SET views=views+1
+			WHERE bbsno=#{param1} 	
+	</update>
+		
+	<update id="addBoardLikes">
+		UPDATE ${param2} SET likes=likes+1
+			WHERE bbsno=#{param1} 	
+	</update>		
+	
+	<update id="updateBoardRefOrders">
+		UPDATE ${tbid} SET ref_step=ref_step+1
+			WHERE ref_no=#{ref_no} AND ref_step >= #{ref_step}	
+	</update>	
+	
+	<update id="updateBoard" parameterType="nz.co.s3m.boards.vo.BoardVO">
+		UPDATE ${tbid} SET
+			ref_step = #{ref_step},
+			title = #{title},
+			cont = #{cont},
+			mdate = now(),
+			likes = #{likes},
+			afile = #{aFile},
+			deleted = #{deleted}
+		WHERE bbsno=#{bbsno}			
+	</update>		
+	
+	<delete id="deleteBoard">
+		DELETE FROM ${param2}
+			WHERE bbsno=${param1}
+	</delete>
+	
+	
+	<select id="totalBoardLists" resultType="java.lang.Integer">
+		SELECT count(bbsno) FROM ${param3} 
+			WHERE ${param1} like '%${param2}%' 
+	</select>	
+	
+	<select id="nextBbsno" resultType="java.lang.Integer">
+		SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '${tbid}' 
+	</select>	
+	<select id="calcRefStep" resultType="java.lang.Integer">
+		SELECT ifnull(max(ref_step)+1, 0) FROM ${tbid} WHERE ref_no = #{ref_no} and ref_parent = #{ref_parent} and ref_level = #{ref_level}   
+	</select>
+	
+	<select id="getChildrenCount" resultType="java.lang.Integer">
+		select count(bbsno) from ${tbid} where ref_no = #{ref_no} and  ref_parent = #{bbsno}   
+	</select>		
+	
+</mapper>

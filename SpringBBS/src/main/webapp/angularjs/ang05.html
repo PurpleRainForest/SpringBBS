@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>angularjs #05</title>
+<script src="js/angular.js"></script>
+<script src="js/controller05.js"></script>
+</head>
+<body>
+	<div data-ng-app="">
+		<form data-ng-controller="SimpleController05">
+			budget : <input data-ng-change="computeNeeded()"
+				data-ng-model="funding.budget"> <br /> invest :
+			{{funding.invest}} <br /> budget : {{funding.target}}
+		</form>
+		<hr />
+		<div data-ng-controller="SimpleController05b">
+			Name:<br /> <input type="text" data-ng-model="name" />{{name}}
+			<ul>
+				<li data-ng-repeat="cust in customers | filter:name | orderBy:'city'">
+					{{ cust.name | uppercase }} - {{ cust.city | lowercase }}</li>
+			</ul>
+		</div>
+		
+		
+		<br /><br />
+		<a data-ng-href="ang06.html">AngularJS - 6</a>
+	</div>
+</body>
+</html>
+

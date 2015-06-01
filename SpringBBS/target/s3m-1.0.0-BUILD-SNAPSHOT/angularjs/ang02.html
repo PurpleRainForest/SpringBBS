@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>angularjs #02 (module)</title>
+	<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+	<script src="js/controller02.js"></script>
+</head>
+<body>
+	<div data-ng-app="demoApp">
+		<div data-ng-controller="SimpleController">
+			Name:<br /> <input type="text" data-ng-model="name" />{{name2}}
+			<ul>
+				<li
+					data-ng-repeat="cust in customers | filter:name | orderBy:'city'">
+					{{ cust.name | uppercase }} - {{ cust.city | lowercase }}</li>
+			</ul>
+		</div>
+		
+		<br /><br />
+		<a data-ng-href="ang03.html#/view1">AngularJS - 3</a>
+	</div>
+ 
+</body>
+</html>
+
