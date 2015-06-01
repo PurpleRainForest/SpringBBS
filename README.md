@@ -1,4 +1,4 @@
-# BBS(Bulletin Board System) with SpringMVC
+## BBS(Bulletin Board System) with SpringMVC
 
 ### Frameworks
     SpringMVC 3.1
