@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Springbbs by PurpleRainForest</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/PurpleRainForest/SpringBBS">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/PurpleRainForest/SpringBBS/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/PurpleRainForest/SpringBBS/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Springbbs</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/PurpleRainForest">PurpleRainForest</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="bbsbulletin-board-system-with-springmvc" class="anchor" href="#bbsbulletin-board-system-with-springmvc" aria-hidden="true"><span class="octicon octicon-link"></span></a>BBS(Bulletin Board System) with SpringMVC</h1>
+
+<h3>
+<a id="frameworks" class="anchor" href="#frameworks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Frameworks</h3>
+
+<pre><code>SpringMVC 3.1
+MyBatis 3.2
+Log4JDBC 0.2.7
+Bootstrap
+CKeditor
+Apache Commons DBCP 1.4
+Apache Commons Fileupload 1.3.1
+Code House Jackson Mapper 1.9.13
+GSON 1.2.4
+MariaDB
+</code></pre>
+
+<h3>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h3>
+
+<pre><code>Multi language Support
+Spring Based, MyBatis
+Rich Text Editting (CKEditor)
+AJAX Type Mutli File Upload
+Vote (Like) Function
+Pagination
+JSON (REST) Support
+</code></pre>
+
+<h3>
+<a id="screen-shot" class="anchor" href="#screen-shot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screen shot</h3>
+
+<pre><code>Article List
+</code></pre>
+
+<p><img src="https://github.com/PurpleRainForest/SpringBBS/blob/master/SpringBBS/src/main/webapp/images/screen_l1.jpg?raw=true" alt="Article List Page"></p>
+
+<pre><code>Detail View
+</code></pre>
+
+<p><img src="https://github.com/PurpleRainForest/SpringBBS/blob/master/SpringBBS/src/main/webapp/images/screen_v1.jpg?raw=true" alt="Detail View Page"></p>
+
+<pre><code>Edit/Register Page
+</code></pre>
+
+<p><img src="https://github.com/PurpleRainForest/SpringBBS/blob/master/SpringBBS/src/main/webapp/images/screen_w1.jpg?raw=true" alt="Edit / Register Page"></p>
+
+<h3>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Use</h3>
+
+<h3>
+<a id="1-database-table-creation" class="anchor" href="#1-database-table-creation" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Database Table Creation</h3>
+
+<p><code>create table tb_clientside</code>
+       <code>( bbsno int(10) unsigned primary key auto_increment,</code>
+       <code>ref_no int(10) unsigned not null default '0',</code>
+       <code>ref_parent int(10) unsigned not null default '0',</code>
+       <code>ref_level int(10) unsigned not null default '0',</code>
+       <code>ref_step int(10) unsigned not null default '0',</code>
+       <code>title varchar(100) not null unique,</code>
+       <code>cont varchar(10000),</code>
+       <code>writer varchar(50),</code>
+       <code>cdate timestamp default '0000-00-00 00:00:00',</code>
+       <code>mdate timestamp default now(),</code>
+       <code>views int(10) unsigned default '0',</code>
+       <code>likes int(10) unsigned default '0',</code>
+       <code>afile varchar(1000),</code>
+       <code>deleted varchar(5) default 'N'</code>
+     <code>)  DEFAULT CHARSET=utf8 ;</code>
+<code>alter table tb_clientside add index index_tb_clientside_title (title);</code></p>
+
+<h3>
+<a id="2-database-connectivity-configuration" class="anchor" href="#2-database-connectivity-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Database connectivity configuration</h3>
+
+<p>Edit 'src/main/java/config/jdbc/jdbc.properties'</p>
+
+<h3>
+<a id="3-run-indexhtm" class="anchor" href="#3-run-indexhtm" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Run index.htm</h3>
+
+<p>Select &amp; Run 'src/webapp/index.htm' </p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
